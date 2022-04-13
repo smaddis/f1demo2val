@@ -6,6 +6,10 @@ import datetime
 from itertools import islice
 import kuksa_viss_client as kuksa
 
+KUKSAVAL_HOST = os.environ['KUKSAVAL_HOST']
+KUKSAVAL_PORT = os.environ['KUKSAVAL_PORT']
+
+
 def readData(client):
     with open("bottas_monza21race.csv", "r", newline='') as csvfile:
         reader = csv.reader(csvfile, delimiter=',')
@@ -48,7 +52,10 @@ def readData(client):
 
 
 def main():
-    config = {}
+    config = {
+        "ip" : KUKSAVAL_HOST,
+        "port" : KUKSAVAL_PORT
+    }
     client = kuksa.KuksaClientThread(config)
     client.authorize()
     client.start()
